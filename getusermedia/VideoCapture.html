@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>getUserMedia</title>
+<link rel="stylesheet" href="../css/main.css">
+
+  <style>
+    video {
+      object-fit: cover;
+    }
+
+    @media (min-width: 1000px) {
+      video {
+        height: 480px;
+      }
+    }
+  </style>
+  <script src="../js/jquery.min.js"></script>
+</head>
+
+<body>
+
+  <div id="container">
+    <video id="video" autoplay playsinline></video>
+  </div>
+
+  <button id="take_pic_btn">take picture from video</button>
+
+
+  <div id="capturedimage"></div>
+  <script src="js/main.js"></script>
+</body>
+<script>
+	var $image = $("#capturedimage");
+	var $video = $("#video").get(0);
+
+	var getImage = function() {
+		var canvas = document.createElement("canvas");
+		canvas.getContext('2d').drawImage(video,0,0,canvas.width, canvas.height);
+
+		var img = document.createElement("img");
+		img.src = canvas.toDataURL();
+		console.log(img.src);
+
+		$image.prepend(img);
+	};
+	$("#take_pic_btn").click( getImage ); 
+</script>
+</html>
